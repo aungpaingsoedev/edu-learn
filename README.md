@@ -1,4 +1,4 @@
-# LMS Front-End
+# Edu Learn - Learning Management System
 
 A Learning Management System (LMS) front-end built with Next.js 15, React 19, and Tailwind CSS. Browse courses, view categories, manage your learning, and toggle between light and dark themes.
 
