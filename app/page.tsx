@@ -21,6 +21,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   // Featured courses data
@@ -116,10 +117,14 @@ export default function Home() {
           </div>
           <div className="mt-12 relative">
             <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-primary/10 w-[200px] h-[200px] rounded-full blur-3xl"></div>
-            <img
+            <Image
               src="/images/pexels-137666-710743.jpg"
               alt="EduLearn Platform"
+              width={1200}
+              height={600}
               className="mx-auto rounded-lg shadow-lg relative z-10 md:h-[900px] object-cover w-full"
+              priority
+              sizes="(max-width: 768px) 100vw, 1200px"
             />
           </div>
         </div>
@@ -177,11 +182,13 @@ export default function Home() {
             {featuredCourses.map((course) => (
               <Link key={course.id} href={`/courses/${course.title}`}>
                 <Card className="overflow-hidden">
-                  <div className="aspect-video w-full overflow-hidden">
-                    <img
+                  <div className="aspect-video w-full overflow-hidden relative">
+                    <Image
                       src={course.image || "/placeholder.svg"}
                       alt={course.title}
-                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-300 hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
                   <CardHeader>

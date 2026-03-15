@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, BookOpen, Filter, Search, Star, Users } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -342,11 +343,13 @@ export default function CategoryDetail() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {courses.map((course) => (
               <Card key={course.id} className="overflow-hidden">
-                <div className="aspect-video w-full overflow-hidden">
-                  <img
+                <div className="aspect-video w-full overflow-hidden relative">
+                  <Image
                     src={course.image || "/placeholder.svg"}
                     alt={course.title}
-                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
                 <CardHeader className="pb-3">
@@ -420,11 +423,13 @@ export default function CategoryDetail() {
             {courses.map((course) => (
               <Card key={course.id} className="overflow-hidden">
                 <div className="flex flex-col md:flex-row">
-                  <div className="md:w-1/3">
-                    <img
+                  <div className="relative md:w-1/3 aspect-video md:aspect-auto md:min-h-[200px]">
+                    <Image
                       src={course.image || "/placeholder.svg"}
                       alt={course.title}
-                      className="h-full w-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6">

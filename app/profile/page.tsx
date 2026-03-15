@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Award,
   BookOpen,
@@ -169,11 +170,13 @@ export default function Profile() {
     <div className="container mx-auto px-4 py-8">
       {/* Profile Header */}
       <div className="relative mb-8">
-        <div className="h-48 w-full overflow-hidden rounded-t-xl bg-muted">
-          <img
+        <div className="relative h-48 w-full overflow-hidden rounded-t-xl bg-muted">
+          <Image
             src={user.coverImage || "/placeholder.svg"}
             alt="Cover"
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
+            sizes="100vw"
           />
         </div>
         <div className="absolute -bottom-16 left-8">
@@ -354,11 +357,13 @@ export default function Profile() {
                       key={certificate.id}
                       className="flex items-center gap-4"
                     >
-                      <div className="h-16 w-28 overflow-hidden rounded-md">
-                        <img
+                      <div className="relative h-16 w-28 overflow-hidden rounded-md">
+                        <Image
                           src={certificate.image || "/placeholder.svg"}
                           alt={certificate.title}
-                          className="h-full w-full object-cover"
+                          fill
+                          className="object-cover"
+                          sizes="112px"
                         />
                       </div>
                       <div>
@@ -471,11 +476,13 @@ export default function Profile() {
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {certificates.map((certificate) => (
                   <Card key={certificate.id} className="overflow-hidden">
-                    <div className="aspect-video w-full overflow-hidden">
-                      <img
+                    <div className="aspect-video w-full overflow-hidden relative">
+                      <Image
                         src={certificate.image || "/placeholder.svg"}
                         alt={certificate.title}
-                        className="h-full w-full object-cover"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </div>
                     <CardHeader>

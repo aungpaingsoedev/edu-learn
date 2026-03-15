@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   Calendar,
   CheckCircle,
@@ -204,11 +205,13 @@ export default function MyCourses() {
           {inProgressCourses.map((course) => (
             <Card key={course.id} className="overflow-hidden">
               <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/4">
-                  <img
+                <div className="relative md:w-1/4 aspect-video md:aspect-auto md:min-h-[140px]">
+                  <Image
                     src={course.image || "/placeholder.svg"}
                     alt={course.title}
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 25vw"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
@@ -286,11 +289,13 @@ export default function MyCourses() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {completedCourses.map((course) => (
               <Card key={course.id} className="overflow-hidden">
-                <div className="aspect-video w-full overflow-hidden">
-                  <img
+                <div className="aspect-video w-full overflow-hidden relative">
+                  <Image
                     src={course.image || "/placeholder.svg"}
                     alt={course.title}
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
                 <CardHeader>
@@ -367,11 +372,13 @@ export default function MyCourses() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {archivedCourses.map((course) => (
               <Card key={course.id} className="overflow-hidden">
-                <div className="aspect-video w-full overflow-hidden">
-                  <img
+                <div className="aspect-video w-full overflow-hidden relative">
+                  <Image
                     src={course.image || "/placeholder.svg"}
                     alt={course.title}
-                    className="h-full w-full object-cover opacity-70"
+                    fill
+                    className="object-cover opacity-70"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
                 <CardHeader>

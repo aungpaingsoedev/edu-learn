@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 import {
   BarChart3,
   Bell,
@@ -29,26 +31,15 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
-import { Bar, BarChart, XAxis } from "recharts";
+
+const DashboardActivityChart = dynamic(
+  () =>
+    import("./activity-chart").then((m) => m.DashboardActivityChart),
+  { ssr: false, loading: () => <div className="h-[240px] animate-pulse rounded bg-muted" /> }
+);
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview");
-
-  // Sample data for charts
-  const activityData = [
-    { day: "Mon", hours: 2.5 },
-    { day: "Tue", hours: 3.2 },
-    { day: "Wed", hours: 1.8 },
-    { day: "Thu", hours: 4.0 },
-    { day: "Fri", hours: 2.7 },
-    { day: "Sat", hours: 1.5 },
-    { day: "Sun", hours: 0.8 },
-  ];
 
   // Sample courses data
   const courses = [
@@ -241,9 +232,11 @@ export default function Dashboard() {
                   <div key={course.id} className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <img
+                        <Image
                           src={course.image || "/placeholder.svg"}
                           alt={course.title}
+                          width={80}
+                          height={48}
                           className="h-12 w-20 rounded-md object-cover"
                         />
                         <div>
@@ -286,37 +279,7 @@ export default function Dashboard() {
                 <CardDescription>Your learning hours this week</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-[240px]">
-                  <ChartContainer
-                    config={{
-                      hours: {
-                        label: "Hours",
-                        color: "hsl(var(--chart-1))",
-                      },
-                    }}
-                  >
-                    <BarChart
-                      data={activityData}
-                      margin={{ top: 16, right: 16, bottom: 0, left: 0 }}
-                    >
-                      <XAxis
-                        dataKey="day"
-                        tickLine={false}
-                        axisLine={false}
-                        tickMargin={8}
-                      />
-                      <Bar
-                        dataKey="hours"
-                        fill="var(--color-hours)"
-                        radius={[4, 4, 0, 0]}
-                      />
-                      <ChartTooltip
-                        content={<ChartTooltipContent />}
-                        cursor={false}
-                      />
-                    </BarChart>
-                  </ChartContainer>
-                </div>
+                <DashboardActivityChart />
                 <div className="mt-2 flex items-center justify-between text-sm">
                   <div className="flex items-center gap-1">
                     <div className="h-3 w-3 rounded-full bg-primary"></div>
@@ -444,9 +407,11 @@ export default function Dashboard() {
                   <h4 className="mb-2 font-medium">Recommended For You</h4>
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
-                      <img
-                        src="/placeholder.svg?height=40&width=60"
+                      <Image
+                        src="/placeholder.svg"
                         alt="Course thumbnail"
+                        width={60}
+                        height={40}
                         className="h-10 w-15 rounded-md object-cover"
                       />
                       <div>
@@ -459,9 +424,11 @@ export default function Dashboard() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <img
-                        src="/placeholder.svg?height=40&width=60"
+                      <Image
+                        src="/placeholder.svg"
                         alt="Course thumbnail"
+                        width={60}
+                        height={40}
                         className="h-10 w-15 rounded-md object-cover"
                       />
                       <div>

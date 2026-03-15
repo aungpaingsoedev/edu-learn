@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   Award,
   Calendar,
@@ -382,11 +383,13 @@ export default function CourseDetail() {
         </div>
         <div>
           <Card className="sticky top-6">
-            <div className="aspect-video w-full overflow-hidden">
-              <img
+            <div className="aspect-video w-full overflow-hidden relative">
+              <Image
                 src={course.image || "/placeholder.svg"}
                 alt={course.title}
-                className="h-full w-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 400px"
               />
               {!isEnrolled && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/50">
@@ -822,11 +825,13 @@ export default function CourseDetail() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[1, 2, 3, 4].map((id) => (
             <Card key={id} className="overflow-hidden">
-              <div className="aspect-video w-full overflow-hidden">
-                <img
+              <div className="aspect-video w-full overflow-hidden relative">
+                <Image
                   src="/images/pexels-137666-710743.jpg"
                   alt="Course thumbnail"
-                  className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-300 hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
               <CardHeader className="p-4">
